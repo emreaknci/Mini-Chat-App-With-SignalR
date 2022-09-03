@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    List<Group> groups = ViewBag.groups;
+}
+@model List<Client>
+<script src="js/index.js"></script>
+<body>
+    <div class="row">
+        <div class="col-md-12 offset-lg-1 col-lg-10">
+            <!--Sidebar-->
+            <div class="row">
+                <div class="col-md-3 order-3 order-md-1 mb-4">
+                    <!--Oda-->
+                    <input class="form-control form-control-lg disabled my-2" type="text" id="groupName" placeholder="Oda Adı" />
+                    <button type="button" class="btn btn-outline-primary  disabled my-2 w-100" id="btnCreateGroup">Oda Oluştur</button>
+                    <select size="5" class="w-100 form-control disabled my-2 " id="rooms" multiple>
+                        @for (int i = 0; i < @groups.Count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                <option selected="" value="-1">@groups[i].GroupName </option>
+                            }
+                            else
+                            {
+                                <option value="@groups[i].GroupName">@groups[i].GroupName </option>
+                            }
+                        }
+                    </select>
+                    <button type="button" class="btn btn-outline-primary disabled w-100" id="btnEnterRoom">Seçili odalara gir</button>
+                    <!--Oda-->
+                    <br /><br /><br />
+                    <!--Clientlar-->
+                    <div class="list-group my-1 clients">
+                        <div id="_clients">
+                            @foreach (var item in Model)
+                            {
+                                <a class="list-group-item list-group-item-action users" click>@item.NickName</a>
+                            }
+                        </div>
+                    </div>
+                    <!--Clientlar-->
+                </div>
+                <div class="col-md-6 order-2 order-md-2 mb-4">
+                    <div class="alert alert-success my-1" style="display: none" id="clientStatusMessages">
+                    </div>
+
+                    <textarea id="txtMesaj" class="form-control my-2" placeholder="Mesajınızı giriniz" cols="10" rows="5"></textarea>
+                    <button type="button" class="btn btn-outline-primary my-1 disabled mx-auto" id="btnSend">Gönder</button>
+                    <button type="button" class="btn btn-outline-primary my-1 disabled mx-auto" id="btnSendToGroup">Gruba Gönder</button>
+
+                    <div id="allMessage">
+                    </div>
+
+                </div>
+                <div class="col-md-3 order-1 order-md-3 mb-4">
+                    <input id="txtNick" class="form-control form-control-lg my-1" type="text" placeholder="Nick" />
+                    <button type="button" class="btn btn-outline-success my-1 w-100" id="btnGirisYap">Giriş Yap</button>
+                </div>
+            </div>
+            <!--Sidebar-->
+
+        </div>
+    </div>
+</body>
